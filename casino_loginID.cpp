@@ -6,23 +6,21 @@
 #include<conio.h>
 #include<cstdlib>
 using namespace std;
-
-class Authentication
+// for login id
+class Authentication      
 {
     public:
     string username,password,un,pw;
     ofstream fout;
     bool isloggedin();
-     void IFSTREAM();
     int gsdata();
 };
 
 bool Authentication::isloggedin()
 {
-    string username,password,un,pw;
     cout<<"Enter username: ";cin>>username;
     cout<<"Enter password: ";cin>>password;
-    ifstream read("data"+username+".txt");
+    ifstream read("data"+username+".txt");   //read the data from (username).txt file.
     getline(read,un);
     getline(read,pw);
 
@@ -34,12 +32,7 @@ bool Authentication::isloggedin()
         return false;
     }
 }
-void Authentication::IFSTREAM()
-{
-    ifstream read("data"+username+".txt");
-    getline(read,un);
-    getline(read, pw);
-}
+
 int Authentication::gsdata()
 {
     int choice;
@@ -74,22 +67,25 @@ int Authentication::gsdata()
     }
     return 0;
 }
-class Game :public Authentication
+
+// it is single level inheritance to access data member from base class to derived class.
+
+class Game :public Authentication  
 {
- bool flag=0;			
+ bool flag=0;			//declaring flag variable as bool data type and initialize by 0.
 int amount;int deposit;
 char input;int guess;
-static int count;
+static int count;     //declaring static variable
 public:
-void display();
-void rules();
+void display();  
+void rules();   //declaring of function
 void game();
 };
-int Game::count;
+int Game::count;    //define static count variable outside of class. 
 void Game::game()
 {
 	bool flag=0;
-display();
+display();        //calling display function.
 ofstream fout;
 fout.open("data"+username+".txt",ios::app);
 cout<<endl;
@@ -116,7 +112,7 @@ if(deposit>amount)
 	goto label1;
 }
 
-int ball=rand()%10+1; 
+int ball=rand()%10+1;    // using random function.
 label2:
 cout<<"Enter input method : "<<endl;
 cout<<"Press 1 if you want to input your guessing number where ball will stop "<<endl;
@@ -178,7 +174,7 @@ if(flag==1)
 	amount=amount+deposit*10;
     count++;
 }
-else
+else if(flag==0)
 {
 	cout<<"Sorry ";
 	cout<<"You lose Rs"<<deposit<<endl;
@@ -216,7 +212,7 @@ void Game::rules()
     cout << "\t3. If you bet on wrong number you will lose your betting amount\n\n";
    cout<<"\n\n========================================================================================\n\n";
 }
-void Game::display()
+void Game::display()   // it is part of DSA to print each variable.
 {
    {
     int n=5;
